@@ -4,7 +4,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'web-request-starter-template',
+    titleTemplate: '%s | POiDER',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -12,7 +12,8 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/sanitize.css/2.0.0/sanitize.min.css' }
     ]
   },
   /*
@@ -26,11 +27,14 @@ module.exports = {
     {src: '~plugins/element-ui'}
   ],
   modules: [
-    ['@nuxtjs/moment']
+    ['@nuxtjs/moment'],
+    ['nuxt-sass-resources-loader', [
+      '~/assets/sass/variable.scss',
+      '~/assets/sass/mixin.scss',
+    ]]
   ],
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    '~/assets/scss/style.scss'
   ],
   build: {
     /*
