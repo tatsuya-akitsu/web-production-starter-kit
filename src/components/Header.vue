@@ -3,8 +3,8 @@
     <div class="wrapper--header">
       <p class="header-note">幅広いWEB制作に対応する依頼・見積りを簡易制作｜POiDER</p>
       <div class="header__area">
-        <a class="header__link">新規登録</a>
-        <a class="header__link">ログイン</a>
+        <a class="header__link" @click="$router.push('/signup')">新規登録</a>
+        <a class="header__link" @click="$router.push('/login')">ログイン</a>
       </div>
     </div>
   </header>
