@@ -54,51 +54,75 @@ img {
   max-width: 100%;
 }
 // btn
-.origin__btn--primary {
+.origin_btn {
   padding: 1.6rem 4.5rem;
   border-radius: 5px;
-  background-color: $color-main;
-  border: 1px solid $color-main;
   transition: $init-anim;
-
+  
   span {
     transition: $init-anim;
     font-size: 1.4rem;
     font-weight: bold;
+  }
+  
+  &:hover {
+    transition: $init-anim;
+
+    span {
+      transition: $init-anim;
+    }
+  }
+
+  img {
+    margin: 0 1rem 0 0;
+    width: 1.4rem;
+  }
+}
+.origin_btn--primary {
+  background-color: $color-main;
+  border: 1px solid $color-main;
+
+  span {
     color: $base-wh;
   }
 
   &:hover {
-    transition: $init-anim;
     background-color: $base-wh;
 
     span {
       color: $color-main;
-      transition: $init-anim;
     }
   }
 }
-.origin__btn--secondary {
-  padding: 1.6rem 4.5rem;
-  border-radius: 5px;
+.origin_btn--secondary {
   background-color: #edeff1;
   border: 1px solid #edeff1;
-  transition: $init-anim;
 
   span {
-    font-size: 1.4rem;
-    font-weight: bold;
     color: $base-bl;
-    transition: $init-anim;
   }
 
   &:hover {
-    transition: $init-anim;
     background-color: $base-bl;
 
     span {
-      transition: $init-anim;
       color: #edeff1;
+    }
+  }
+}
+.origin_btn--tertiary {
+  background-color: #f3f3f3;
+  border: 1px solid #f3f3f3;
+
+  span {
+    color: $base-bl;
+  }
+
+  &:hover {
+    background-color: $base-bl;
+
+    span {
+      color: #f3f3f3;
     }
   }
 }
