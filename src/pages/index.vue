@@ -15,8 +15,8 @@
               常にあらゆる情報をクライアントからヒアリングする必要が発生します。<br />
               そんな手間を一箇所に集約することで双方が確認しやすくしたプラットフォームです。
             </p>
-            <el-button class="origin__btn--primary">新規登録</el-button>
-            <el-button class="origin__btn--secondary">ログイン</el-button>
+            <el-button class="origin_btn origin_btn--primary">新規登録</el-button>
+            <el-button class="origin_btn origin_btn--secondary" @click="$router.push('/login')">ログイン</el-button>
           </div>
         </div>
       </div>
