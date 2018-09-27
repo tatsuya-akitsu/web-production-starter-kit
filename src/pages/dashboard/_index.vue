@@ -1,10 +1,10 @@
 <template>
   <div>
-    <secrtion class="section section-dashboard">
+    <section class="section section-dashboard">
       <div class="wrapper">
         <h2>ダッシュボード</h2>
       </div>
-    </secrtion>
+    </section>
   </div>
 </template>
 
