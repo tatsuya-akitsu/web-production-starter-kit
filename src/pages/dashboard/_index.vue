@@ -15,7 +15,9 @@ export default {
     return {
       title: 'ダッシュボード'
     }
+  },
+  created () {
+    this.$store.commit('loggined')
   }
 }
 </script>
-
