@@ -22,10 +22,6 @@ html {
 }
 
 body {
-  @media screen and (max-width: 768px) {
-    overflow-x: hidden;
-  }
-
   background: $base-wh;
   color: $base-bl;
   font-family: $font-stack;
@@ -41,6 +37,16 @@ body {
   width: 100%;
 }
 
+.section--style_1 {
+  display: flex;
+  justify-content: space-between;  
+}
+.dashboard-main {
+  margin-left: auto;
+  padding: 5rem 3rem;
+  width: calc(100% - 26rem);
+  border-left: 1px solid #ddd;
+}
 .wrapper {
   position: relative;
   margin: 0 auto;
@@ -125,6 +131,53 @@ img {
       color: #f3f3f3;
     }
   }
+}
+.origin_btn--small {
+  padding: 1.2rem 2.8rem;
+  border-radius: 5px;
+  transition: $init-anim;
+  
+  span {
+    transition: $init-anim;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  
+  &:hover {
+    transition: $init-anim;
+
+    span {
+      transition: $init-anim;
+    }
+  }
+
+  img {
+    margin: 0 1rem 0 0;
+    width: 1.4rem;
+  }
+}
+
+.origin-badge {
+  display: inline-block;
+  padding: .4rem .8rem;
+  line-height: 1;
+  border-radius: 3px;
+}
+.origin-badge__create {
+  color: $base-wh;
+  background-color: #0fe071;
+}
+.origin-badge__doing {
+  color: $base-wh;
+  background-color: #ef1488;
+}
+.origin-badge__done {
+  color: $base-wh;
+  background-color: #0c83b6;
+}
+.origin-badge__warning {
+  color: $base-bl;
+  background-color: #e0da0f;
 }
 </style>
 

@@ -12,7 +12,7 @@
             </p>
           </div>
           <div class="form-item">
-            <label>
+            <label class="form-label">
               <span class="label__title">メールアドレス</span>
             </label>
             <div class="form-item__inner">
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="form-item">
-            <label>
+            <label class="form-label">
               <span class="label__title">パスワード</span>
             </label>
             <div class="form-item__inner">
@@ -145,32 +145,8 @@ export default {
 }
 
 .form {
-  margin: 0 auto;
   margin-top: 5rem;
   max-width: 540px;
-}
-.form-item {
-  margin: 3rem 0 0;
-
-  &:nth-of-type(1) {
-    margin: 0;
-  }
-  
-  &:nth-last-of-type(1) {
-    margin-bottom: 3rem;
-  }
-}
-
-label {
-  display: block;
-  padding-bottom: 1.2rem;
-  font-size: 0;
-  text-align: left;
-}
-.label__title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: $base-bl;
 }
 
 .login__link {
@@ -186,28 +162,6 @@ label {
     transition: $init-anim;
     text-decoration: none;
   }
-}
-.form-msg {
-  margin: 0;
-  padding: 1rem 3rem;
-  font-size: 0;
-  text-align: left;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 3px;
-
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    margin: -.2rem 1rem 0 0;
-    width: 1.4rem;
-  }
-}
-.alert-msg {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.4rem;
-  color: #721c24;
 }
 
 .login__note {
