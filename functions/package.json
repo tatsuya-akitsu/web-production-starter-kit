@@ -9,12 +9,30 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "@nuxtjs/moment": "^1.0.0",
+    "element-ui": "^2.4.7",
     "firebase": "^5.5.1",
     "firebase-admin": "~5.13.0",
     "firebase-functions": "^2.0.0",
+    "moment": "^2.22.2",
+    "node-sass": "^4.9.3",
     "nuxt": "^1.4.2",
+    "nuxt-sass-resources-loader": "^2.0.5",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "style-resources-loader": "^1.2.1",
     "vue": "^2.5.17",
     "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-vue": "^4.0.0",
+    "firebase-tools": "^4.0.3",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
   },
   "engines": {
     "node": "8"
