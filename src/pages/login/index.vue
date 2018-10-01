@@ -147,6 +147,7 @@ export default {
 .form {
   margin-top: 5rem;
   max-width: 540px;
+  text-align: center;
 }
 
 .login__link {

@@ -213,6 +213,11 @@ export default {
 .form {
   margin-top: 5rem;
   max-width: 540px;
+  text-align: center;
+}
+
+.form-control {
+  text-align: left;
 }
 
 .thumbnail-input__box {
