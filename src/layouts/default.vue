@@ -4,14 +4,16 @@
     <transition name="fade">
       <nuxt />
     </transition>
+    <app-footer />
   </div>
 </template>
 
 <script>
 import AppHeader from '~/components/Header'
+import AppFooter from '~/components/Footer'
 
 export default {
-  components: { AppHeader }
+  components: { AppHeader, AppFooter }
 }
 </script>
 
