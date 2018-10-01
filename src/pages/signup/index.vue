@@ -12,7 +12,7 @@
             </p>
           </div>
           <div class="form-item">
-            <label>
+            <label class="form-label">
               <span class="label__title">ユーザー名</span>
               <span class="require-icon require-icon__required">必須</span>
             </label>
@@ -27,7 +27,7 @@
             </div>
           </div>
           <div class="form-item">
-            <label>
+            <label class="form-label">
               <span class="label__title">メールアドレス</span>
               <span class="require-icon require-icon__required">必須</span>
             </label>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="form-item">
-            <label>
+            <label class="form-label">
               <span class="label__title">パスワード</span>
               <span class="require-icon require-icon__required">必須</span>
             </label>
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="form-item">
-            <label>
+            <label class="form-label">
               <span class="label__title">サムネイル</span>
               <span class="require-icon require-icon__any">任意</span>
             </label>
@@ -211,84 +211,8 @@ export default {
 }
 
 .form {
-  margin: 0 auto;
   margin-top: 5rem;
   max-width: 540px;
-}
-.form-item {
-  margin: 3rem 0 0;
-
-  &:nth-of-type(1) {
-    margin: 0;
-  }
-  
-  &:nth-last-of-type(1) {
-    margin-bottom: 3rem;
-  }
-}
-
-label {
-  display: block;
-  padding-bottom: 1.2rem;
-  font-size: 0;
-  text-align: left;
-}
-.label__title {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: $base-bl;
-}
-
-.require-icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 1rem;
-  padding: .7rem 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  line-height: 1;
-  border-radius: 3px;
-}
-.require-icon__required {
-  color: $base-wh;
-  background-color: #e1252f;
-}
-.require-icon__any {
-  color: $base-bl;
-  background-color: #f7fbfe;
-}
-
-.form-msg {
-  margin: 0;
-  padding: 1rem 3rem;
-  font-size: 0;
-  text-align: left;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 3px;
-
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    margin: -.2rem 1rem 0 0;
-    width: 1.4rem;
-  }
-}
-.alert-msg {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.4rem;
-  color: #721c24;
-}
-
-.form__note {
-  margin: 0;
-  padding-top: 1rem;
-  font-size: 1.2rem;
-  color: #dddddd;
-  text-align: left;
 }
 
 .thumbnail-input__box {
