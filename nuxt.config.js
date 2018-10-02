@@ -27,7 +27,11 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: {
+    name: 'rotating-plane',
+    color: '#FFFFFF',
+    background: '#0ecec8'
+  },
   /*
   ** Build configuration
   */

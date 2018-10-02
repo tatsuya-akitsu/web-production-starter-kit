@@ -118,6 +118,12 @@ const createStore = () => {
       },
       logout (state) {
         state.isLoggined = false
+      },
+      inLoading (state) {
+        state.isLoading = true
+      },
+      outLoading (state) {
+        state.isLoading = false
       }
     }
   })

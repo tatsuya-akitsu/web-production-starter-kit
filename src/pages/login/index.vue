@@ -69,19 +69,24 @@ export default {
       password: '',
     }
   },
-  mounted () {
-    firebase.auth().getRedirectResult().then(result => {
-      if (result.user) {
-        this.$router.push(`/dashboard/${result.user.uid}`)
-      }
-    })
+  updated () {
+    if (this.$store.state.isLoading === true) {
+      const loading = document.getElementById('loading')
+      const wh = window.innerHeight
+      loading.style.height = `${wh}px`
+    }
   },
   methods: {
     googleLogin() {
       let provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(provider).catch((err) => {
-        this.errors.push(err)
-      })
+      firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+          this.$store.commit('inLoading')
+          this.$router.push(`/dashboard/${result.user.uid}`)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
     normalLogin() {
       const mail = this.email
@@ -116,6 +121,7 @@ export default {
         .then(() => {
           localStorage.mail = mail
           localStorage.password = password
+          this.$store.commit('inLoading')
           this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
         })
         .catch((error) => {

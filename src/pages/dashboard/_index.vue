@@ -82,6 +82,7 @@ export default {
     this.uid = firebase.auth().currentUser.uid
   },
   mounted() {
+    this.$store.commit('outLoading')
     firebase.firestore().collection(this.uid).get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -123,26 +124,3 @@ th, td {
   text-align: center;
 }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

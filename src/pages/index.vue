@@ -27,6 +27,11 @@
 <script>
 export default {
   name: 'top',
+  head() {
+    return {
+      title: 'サービストップページ'
+    }
+  },
   data: () => {},
   mounted () {
     const header = document.getElementById('header')
