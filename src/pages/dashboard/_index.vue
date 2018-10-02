@@ -34,7 +34,7 @@
                       {{ item.status }}
                     </span>
                   </td>
-                  <td>{{ item.project }}</td>
+                  <td><a @click="$router.push(`/order/template/detail/${item.key}`)">{{ item.project }}</a></td>
                   <td>{{ item.client }}</td>
                   <td>{{ item.rep }}</td>
                   <td>{{ item.date }}</td>
@@ -114,7 +114,7 @@ thead {
 tbody {
   tr {
     &:nth-child(even) {
-      background-color: #ddd;
+      background-color: #f1f1f1;
     }
   }
 }
@@ -122,5 +122,23 @@ th, td {
   padding: .8rem .5rem;
   font-size: 1.4rem;
   text-align: center;
+
+  a {
+    cursor: pointer;
+    transition: $init-anim;
+
+    &:hover {
+      transition: $init-anim;
+      text-decoration: underline;
+    }
+  }
+}
+tr {
+  transition: $init-anim;
+
+  &:hover {
+    transition: $init-anim;
+    background-color: #f8ffff;
+  }
 }
 </style>

@@ -94,7 +94,7 @@ h1 {
   margin: 0;
   font-size: 1.4rem;
   font-weight: bold;
-  columns: #012336;
+  color: #012336;
 }
 .main__title {
   margin: 0;

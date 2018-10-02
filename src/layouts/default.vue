@@ -180,7 +180,9 @@ img {
 
 .origin-badge {
   display: inline-block;
+  vertical-align: middle;
   padding: .4rem .8rem;
+  font-size: 1.2rem;
   line-height: 1;
   border-radius: 3px;
 }
