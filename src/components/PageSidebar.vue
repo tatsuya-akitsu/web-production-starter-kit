@@ -1,5 +1,5 @@
 <template>
-  <aside class="dashboard-sidebar">
+  <aside id="sidebar" class="dashboard-sidebar">
     <div class="wrapper--sidebar">
       <div class="sidebar__thumbnail">
         <img :src="photoUrl" alt="" />
@@ -54,6 +54,10 @@ export default {
   },
   mounted () {
     setTimeout(() => {
+      const sidebar = document.getElementById('sidebar')
+      const wh = window.innerHeight
+      sidebar.style.height = `${wh}px`
+
       this.uid = firebase.auth().currentUser.uid
       this.name = firebase.auth().currentUser.displayName
       this.photoUrl = firebase.auth().currentUser.photoURL
@@ -78,6 +82,7 @@ export default {
   position: fixed;
   left: 0;
   width: 20rem;
+  border-right: 1px solid #ddd;
 }
 .wrapper--sidebar {
   padding: 5rem 2rem;
