@@ -1,6 +1,11 @@
 <template>
   <div>
     <section class="section section--style_1">
+      <el-alert
+        title="案件依頼の削除が完了しました"
+        type="success"
+        :class="{anim: success === true}"
+      />
       <page-sidebar />
       <div class="dashboard-main">
         <div class="wrapper--main">
@@ -44,9 +49,24 @@
                     </el-button>
                   </td>
                   <td>
-                    <el-button class="origin_btn--small origin_btn--secondary">
+                    <el-button class="origin_btn--small origin_btn--secondary" @click="dialogVisible = true">
                       削除
                     </el-button>
+                    <el-dialog
+                      title="削除確認"
+                      :visible.sync="dialogVisible"
+                      width="640px"
+                      center
+                    >
+                      <p class="delete__text">
+                        選択したデータを削除します。<br />
+                        本当に削除してもよろしいですか？
+                        <br /><br />
+                        ※削除したデータを復旧させることはできませんのでご注意ください
+                      </p>
+                      <el-button class="origin_btn--small origin_btn--secondary" @click="dialogVisible = false">キャンセル</el-button>
+                      <el-button class="origin_btn--small origin_btn--primary" @click="deleteData(item.key)">削除</el-button>
+                    </el-dialog>
                   </td>
                 </tr>
               </tbody>
@@ -74,7 +94,9 @@ export default {
   data: () => {
     return {
       uid: '',
-      orders: []
+      orders: [],
+      dialogVisible: false,
+      success: false
     }
   },
   created () {
@@ -89,6 +111,27 @@ export default {
           this.orders.push(Object.assign({ key: doc.id }, doc.data()))
         })
       })
+  },
+  methods: {
+    deleteData (key) {
+      firebase.firestore().collection(this.uid).doc(key).delete()
+        .then(() => {
+          console.log('削除完了')
+          this.dialogVisible = false
+          this.success = true
+          this.orders = []
+
+          firebase.firestore().collection(this.uid).get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                this.orders.push(Object.assign({ key: doc.id }, doc.data()))
+              })
+            })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>

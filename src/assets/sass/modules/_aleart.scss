@@ -1,0 +1,27 @@
+.el-alert {
+  display: inline-block;
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 1.2rem 10rem;
+  width: auto;
+
+  &.anim {
+    top: 15%;
+  }
+}
+.el-alert__content {
+  display: block;
+  padding: 0;
+  width: 100%;
+}
+.el-alert__title {
+  display: block;
+  font-size: 1.4rem;
+  text-align: left;
+}
+.el-alert__closebtn {
+  top: 50%;
+  transform: translate(0, -50%);
+}

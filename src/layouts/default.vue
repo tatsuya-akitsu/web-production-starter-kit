@@ -75,6 +75,10 @@ body {
   width: 100%;
   max-width: $inner-width;
 }
+.wrapper--main {
+  margin: 0 auto;
+  max-width: 1200px;
+}
 
 img {
   width: 100%;
