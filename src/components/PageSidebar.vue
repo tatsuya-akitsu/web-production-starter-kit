@@ -7,6 +7,12 @@
       <p class="sidebar__user-name">{{ name }}</p>
       <ul class="sidebar-list">
         <li>
+          <a @click="backHome">
+            <img src="/img/dashboard/dashboard_img_7.svg" alt="" />
+            ダッシュボード
+          </a>
+        </li>
+        <li>
           <a @click="$router.push('/order/template/sheet1')">
             <img src="/img/dashboard/dashboard_img_2.svg" alt="" />
             新規作成
@@ -64,7 +70,10 @@ export default {
     }, 10)
   },
   methods: {
-    logout() {
+    backHome () {
+      this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
+    },
+    logout () {
       firebase.auth().signOut()
         .then(() => {
           this.$store.commit('logout')

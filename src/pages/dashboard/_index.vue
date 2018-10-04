@@ -6,6 +6,16 @@
         type="success"
         :class="{anim: success === true}"
       />
+      <el-alert
+        title="案件作成が完了しました"
+        type="success"
+        :class="{anim: $store.state.completeOrder === true}"
+      />
+      <el-alert
+        title="案件編集が完了しました"
+        type="success"
+        :class="{anim: $store.state.completeEditOrder === true}"
+      />
       <page-sidebar />
       <div class="dashboard-main">
         <div class="wrapper--main">
@@ -39,12 +49,12 @@
                       {{ item.status }}
                     </span>
                   </td>
-                  <td><a @click="$router.push(`/order/template/detail/${item.key}`)">{{ item.project }}</a></td>
-                  <td>{{ item.client }}</td>
-                  <td>{{ item.rep }}</td>
+                  <td><a @click="$router.push(`/order/template/detail/${item.key}`)">{{ item.projectName }}</a></td>
+                  <td>{{ item.clientName }}</td>
+                  <td>{{ item.repName }}</td>
                   <td>{{ item.date }}</td>
                   <td>
-                    <el-button class="origin_btn--small origin_btn--primary">
+                    <el-button class="origin_btn--small origin_btn--primary" @click="$router.push(`/order/edit/edit1/${item.key}`)">
                       編集
                     </el-button>
                   </td>
@@ -116,7 +126,6 @@ export default {
     deleteData (key) {
       firebase.firestore().collection(this.uid).doc(key).delete()
         .then(() => {
-          console.log('削除完了')
           this.dialogVisible = false
           this.success = true
           this.orders = []
@@ -156,8 +165,14 @@ thead {
 }
 tbody {
   tr {
+    transition: $init-anim;
+
     &:nth-child(even) {
       background-color: #f1f1f1;
+    }
+    &:hover {
+      transition: $init-anim;
+      background-color: #f8ffff;
     }
   }
 }
@@ -174,14 +189,6 @@ th, td {
       transition: $init-anim;
       text-decoration: underline;
     }
-  }
-}
-tr {
-  transition: $init-anim;
-
-  &:hover {
-    transition: $init-anim;
-    background-color: #f8ffff;
   }
 }
 </style>

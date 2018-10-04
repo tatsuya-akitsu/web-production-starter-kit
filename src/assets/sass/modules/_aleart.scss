@@ -1,14 +1,16 @@
 .el-alert {
   display: inline-block;
   position: absolute;
-  top: -10%;
+  top: -30%;
   left: 50%;
   transform: translate(-50%, 0);
+  transition: $init-anim;
   padding: 1.2rem 10rem;
   width: auto;
 
   &.anim {
     top: 15%;
+    transition: $init-anim;
   }
 }
 .el-alert__content {
