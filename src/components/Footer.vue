@@ -2,8 +2,8 @@
   <footer id="footer" class="footer">
     <div class="wrapper--footer">
       <ul class="footer-list">
-        <li><a>利用規約</a></li>
-        <li><a>プライバシーポリシー</a></li>
+        <li><a @click="$router.push('/terms')">利用規約</a></li>
+        <li><a @click="$router.push('/privacy')">プライバシーポリシー</a></li>
         <li><a>お問い合わせ</a></li>
         <li><a>開発者について</a></li>
       </ul>
@@ -41,6 +41,7 @@
   }
 
   a {
+    cursor: pointer;
     padding: .3rem 1rem;
     display: inline-block;
     font-size: 1.2rem;
