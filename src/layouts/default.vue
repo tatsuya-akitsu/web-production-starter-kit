@@ -75,6 +75,10 @@ body {
   width: 100%;
   max-width: $inner-width;
 }
+.wrapper--main {
+  margin: 0 auto;
+  max-width: 1200px;
+}
 
 img {
   width: 100%;
@@ -100,7 +104,8 @@ img {
     }
   }
 
-  img {
+  img,
+  svg {
     margin: 0 1rem 0 0;
     width: 1.4rem;
   }
@@ -150,6 +155,26 @@ img {
 
     span {
       color: #f3f3f3;
+    }
+    
+    path {
+      fill: #f3f3f3;
+    }
+  }
+}
+.origin_btn--facebook {
+  background-color: #305097;
+  border: 1px solid #305097;
+
+  span {
+    color: $base-wh;
+  }
+
+  &:hover {
+    background-color: $base-wh;
+
+    span {
+      color: #305097;
     }
   }
 }

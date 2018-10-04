@@ -21,7 +21,7 @@
                 <el-input
                   name="clientName"
                   type="text"
-                  v-model="$store.state.order.clientName"
+                  v-model="$store.state.editOrder.clientName"
                   placeholder="クライアント名"
                   class="form-control"
                 />
@@ -36,7 +36,7 @@
                 <el-input
                   name="repName"
                   type="text"
-                  v-model="$store.state.order.repName"
+                  v-model="$store.state.editOrder.repName"
                   placeholder="山田 太郎"
                   class="form-control"
                 />
@@ -51,7 +51,7 @@
                 <el-input
                   name="projectName"
                   type="text"
-                  v-model="$store.state.order.projectName"
+                  v-model="$store.state.editOrder.projectName"
                   class="form-control"
                 />
               </div>
@@ -65,7 +65,7 @@
                 <el-input
                   name="deliveryMethod"
                   type="text"
-                  v-model="$store.state.order.deliveryMethod"
+                  v-model="$store.state.editOrder.deliveryMethod"
                   placeholder="データ納品"
                   class="form-control"
                 />
@@ -78,7 +78,7 @@
               </label>
               <div class="form-item__inner">
                 <el-date-picker
-                  v-model="$store.state.order.deliveryDate"
+                  v-model="$store.state.editOrder.deliveryDate"
                   type="date"
                   placeholder="納品希望日を選択してください"
                 />
@@ -90,13 +90,13 @@
                 <span class="require-icon require-icon__any">任意</span>
               </label>
               <div class="form-item__inner">
-                <el-radio v-model="$store.state.order.hopeTime" label="なる早" border>なる早</el-radio>
-                <el-radio v-model="$store.state.order.hopeTime" label="通常" border>通常</el-radio>
-                <el-radio v-model="$store.state.order.hopeTime" label="ゆっくり" border>ゆっくり</el-radio>
+                <el-radio v-model="$store.state.editOrder.hopeTime" label="なる早" border>なる早</el-radio>
+                <el-radio v-model="$store.state.editOrder.hopeTime" label="通常" border>通常</el-radio>
+                <el-radio v-model="$store.state.editOrder.hopeTime" label="ゆっくり" border>ゆっくり</el-radio>
                 <el-input
                   name="hopeTimeDetail"
                   type="text"
-                  v-model="$store.state.order.hopeTimeDetail"
+                  v-model="$store.state.editOrder.hopeTimeDetail"
                   placeholder="○○日までにはいただけると嬉しいです"
                   class="form-control"
                 />
@@ -111,7 +111,7 @@
                 <el-input
                   name="siteName"
                   type="text"
-                  v-model="$store.state.order.siteName"
+                  v-model="$store.state.editOrder.siteName"
                   class="form-control"
                 />
               </div>
@@ -126,7 +126,7 @@
                   type="textarea"
                   :rows="5"
                   placeholder="当サイトは○○社のコーポレートサイトです"
-                  v-model="$store.state.order.siteDescription"
+                  v-model="$store.state.editOrder.siteDescription"
                 />
               </div>
             </div>
@@ -140,7 +140,7 @@
                   type="textarea"
                   :rows="5"
                   placeholder="当サイトは○○社のコーポレートサイトです"
-                  v-model="$store.state.order.ogpText"
+                  v-model="$store.state.editOrder.ogpText"
                 />
               </div>
             </div>
@@ -150,7 +150,7 @@
                 <span class="require-icon require-icon__required">必須</span>
               </label>
               <div class="form-item__inner">
-                <el-checkbox-group v-model="$store.state.order.productionPurpose">
+                <el-checkbox-group v-model="$store.state.editOrder.productionPurpose">
                   <el-checkbox label="広告用LP" />
                   <el-checkbox label="サイトリニューアル" />
                   <el-checkbox label="新規制作" />
@@ -166,7 +166,7 @@
                 <span class="require-icon require-icon__required">必須</span>
               </label>
               <div class="form-item__inner">
-                <el-checkbox-group v-model="$store.state.order.orderRange">
+                <el-checkbox-group v-model="$store.state.editOrder.orderRange">
                   <el-checkbox label="インフラ" />
                   <el-checkbox label="バックエンド" />
                   <el-checkbox label="フロントエンド" />
@@ -187,7 +187,7 @@
                   <h3 class="form-item__title">年齢層</h3>
                   <div class="column__inner">
                     <el-slider
-                      v-model="$store.state.order.age"
+                      v-model="$store.state.editOrder.age"
                       range
                       show-stops
                       :step="10"
@@ -198,15 +198,15 @@
                 <div class="form-item__column form-column">
                   <h3 class="form-item__title">性別</h3>
                   <div class="column__inner">
-                    <el-radio v-model="$store.state.order.gender" label="男性" border>男性</el-radio>
-                    <el-radio v-model="$store.state.order.gender" label="女性" border>女性</el-radio>
+                    <el-radio v-model="$store.state.editOrder.gender" label="男性" border>男性</el-radio>
+                    <el-radio v-model="$store.state.editOrder.gender" label="女性" border>女性</el-radio>
                   </div>
                 </div>
                 <div class="form-item__column form-column">
                   <h3 class="form-item__title">職業</h3>
                   <div class="column__inner">
-                    <el-checkbox :indeterminate="$store.state.order.isEmployIndeterminate" v-model="$store.state.order.checkAllEmployment" @change="handleCheckedAllEmployment">すべて選択</el-checkbox>
-                    <el-checkbox-group v-model="$store.state.order.checkedEmployment" @change="handleCheckedEmploy">
+                    <el-checkbox :indeterminate="$store.state.editOrder.isEmployIndeterminate" v-model="$store.state.editOrder.checkAllEmployment" @change="handleCheckedAllEmployment">すべて選択</el-checkbox>
+                    <el-checkbox-group v-model="$store.state.editOrder.checkedEmployment" @change="handleCheckedEmploy">
                       <el-checkbox v-for="(emp, e) in employment" :label="emp" :key="e">{{emp}}</el-checkbox>
                     </el-checkbox-group>
                   </div>
@@ -214,8 +214,8 @@
                 <div class="form-item__column form-column">
                   <h3 class="form-item__title">職種</h3>
                   <div class="column__inner">
-                    <el-checkbox :indeterminate="$store.state.order.isJobCategoryIndeterminate" v-model="$store.state.order.checkAllJobCategory" @change="handleCheckedAllJobCategory">すべて選択</el-checkbox>
-                    <el-checkbox-group v-model="$store.state.order.checkedJobCategory" @change="handleCheckedJobCategory">
+                    <el-checkbox :indeterminate="$store.state.editOrder.isJobCategoryIndeterminate" v-model="$store.state.editOrder.checkAllJobCategory" @change="handleCheckedAllJobCategory">すべて選択</el-checkbox>
+                    <el-checkbox-group v-model="$store.state.editOrder.checkedJobCategory" @change="handleCheckedJobCategory">
                       <el-checkbox v-for="(item, i) in jobCategory" :label="item" :key="i">{{item}}</el-checkbox>
                     </el-checkbox-group>
                   </div>
@@ -223,8 +223,8 @@
                 <div class="form-item__column form-column">
                   <h3 class="form-item__title">地方圏</h3>
                   <div class="column__inner">
-                    <el-checkbox :indeterminate="$store.state.order.isLocalIndeterminate" v-model="$store.state.order.checkAllLocal" @change="handleCheckedAllLocal">すべて選択</el-checkbox>
-                    <el-checkbox-group v-model="$store.state.order.checkedLocal" @change="handleCheckedLocal">
+                    <el-checkbox :indeterminate="$store.state.editOrder.isLocalIndeterminate" v-model="$store.state.editOrder.checkAllLocal" @change="handleCheckedAllLocal">すべて選択</el-checkbox>
+                    <el-checkbox-group v-model="$store.state.editOrder.checkedLocal" @change="handleCheckedLocal">
                       <el-checkbox v-for="(local, l) in local" :label="local" :key="l">{{local}}</el-checkbox>
                     </el-checkbox-group>
                   </div>
@@ -232,7 +232,7 @@
               </div>
             </div>
           </form>
-          <el-button class="origin_btn origin_btn--primary" @click="$router.push(`/order/template/sheet2`)">
+          <el-button class="origin_btn origin_btn--primary" @click="$router.push(`/order/edit/edit2/${key}`)">
             次へ
           </el-button>
         </div>
@@ -242,6 +242,7 @@
 </template>
 
 <script>
+import firebase from '@/plugins/firebase.js'
 import PageSidebar from '~/components/PageSidebar'
 import PageSectionTitle from '~/components/PageSectionTitle'
 
@@ -258,44 +259,56 @@ export default {
       errors: [],
       employment: [],
       jobCategory: [],
-      local: []
+      local: [],
+      key: ''
     }
   },
   created () {
+    const uid = firebase.auth().currentUser.uid
+    const orderId = this.$route.params.index
+    firebase.firestore().collection(uid).doc(orderId).get()
+      .then((doc) => {
+        this.key = doc.id
+        this.$store.commit('update', doc.data())
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  mounted () {
     setTimeout(() => {
-      this.employment = this.$store.state.order.employment
-      this.jobCategory = this.$store.state.order.jobCategory
-      this.local = this.$store.state.order.local
+      this.employment = this.$store.state.editOrder.employment
+      this.jobCategory = this.$store.state.editOrder.jobCategory
+      this.local = this.$store.state.editOrder.local
     }, 1)
-    console.log(this.$store.state)
   },
   methods: {
     handleCheckedEmploy (value) { // 職業選択
       let checkedCount = value.length
-      this.$store.state.order.checkAllEmployment = checkedCount === this.employment.length
-      this.$store.state.order.isEmployIndeterminate = checkedCount > 0 && checkedCount < this.employment.length
+      this.$store.state.editOrder.checkAllEmployment = checkedCount === this.employment.length
+      this.$store.state.editOrder.isEmployIndeterminate = checkedCount > 0 && checkedCount < this.employment.length
     },
     handleCheckedAllEmployment (val) {  // 職業全て選択
-      this.$store.state.order.checkedEmployment = val ? this.employment : []
-      this.$store.state.order.isEmployIndeterminate = false
+      this.$store.state.editOrder.checkedEmployment = val ? this.employment : []
+      this.$store.state.editOrder.isEmployIndeterminate = false
     },
     handleCheckedJobCategory (value) {  // 職種選択
       let checkedCount = value.length
-      this.$store.state.order.checkAllJobCategory = checkedCount === this.jobCategory.length
-      this.$store.state.order.isJobCategoryIndeterminate = checkedCount > 0 && checkedCount < this.jobCategory.length
+      this.$store.state.editOrder.checkAllJobCategory = checkedCount === this.jobCategory.length
+      this.$store.state.editOrder.isJobCategoryIndeterminate = checkedCount > 0 && checkedCount < this.jobCategory.length
     },
     handleCheckedAllJobCategory (val) { // 職種全て選択
-      this.$store.state.order.checkedJobCategory = val ? this.jobCategory : []
-      this.$store.state.order.isJobCategoryIndeterminate = false
+      this.$store.state.editOrder.checkedJobCategory = val ? this.jobCategory : []
+      this.$store.state.editOrder.isJobCategoryIndeterminate = false
     },
     handleCheckedLocal (value) {  // 地方圏選択
       let checkedCount = value.length
-      this.$store.state.order.checkAllLocal = checkedCount === this.local.length
-      this.$store.state.order.isLocalIndeterminate = checkedCount > 0 && checkedCount < this.local.length
+      this.$store.state.editOrder.checkAllLocal = checkedCount === this.local.length
+      this.$store.state.editOrder.isLocalIndeterminate = checkedCount > 0 && checkedCount < this.local.length
     },
     handleCheckedAllLocal (val) { // 地方圏全て選択
-      this.$store.state.order.checkedLocal = val ? this.local : []
-      this.$store.state.order.isLocalIndeterminate = false
+      this.$store.state.editOrder.checkedLocal = val ? this.local : []
+      this.$store.state.editOrder.isLocalIndeterminate = false
     }
   }
 }

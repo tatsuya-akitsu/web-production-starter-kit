@@ -79,7 +79,7 @@
                 <tr class="confirm__box">
                   <th class="confirm__label">職業</th>
                   <td class="confirm__item">
-                    <p v-for="(employ, e) in employList" :key="e">
+                    <p v-for="(employ, e) in $store.state.order.checkedEmployment" :key="e">
                       {{ employ }}
                     </p>
                   </td>
@@ -87,7 +87,7 @@
                 <tr class="confirm__box">
                   <th class="confirm__label">職種</th>
                   <td class="confirm__item">
-                    <p v-for="(job, j) in jobCategory" :key="j">
+                    <p v-for="(job, j) in $store.state.order.checkedJobCategory" :key="j">
                       {{ job }}
                     </p>
                   </td>
@@ -95,7 +95,7 @@
                 <tr class="confirm__box">
                   <th class="confirm__label">地方圏</th>
                   <td class="confirm__item">
-                    <p v-for="(local, l) in localList" :key="l">
+                    <p v-for="(local, l) in $store.state.order.checkedLocal" :key="l">
                       {{ local }}
                     </p>
                   </td>
@@ -107,16 +107,18 @@
                 <tr class="confirm__box">
                   <th class="confirm__label">表示プラットフォーム</th>
                   <td class="confirm__item">
-                    <p v-for="(disply, d) in displayList" :key="d">
-                      {{ disply.val }}{{ disply.version }}
+                    <p v-for="(disply, d) in $store.state.order.checkedDisplay" :key="d">
+                      {{ disply }}
                     </p>
-                    {{ $store.state.order.enviromentVersion }}
+                    <p v-if="$store.state.order.environmentVersion">
+                      {{ $store.state.order.environmentVersion }}
+                    </p>
                   </td>
                 </tr>
                 <tr class="confirm__box">
                   <th class="confirm__label">レスポンシブ</th>
                   <td class="confirm__item">
-                    <p v-for="(res, r) in responsiveList" :key="r">
+                    <p v-for="(res, r) in $store.state.order.checkedResponsive" :key="r">
                       {{ res }}
                     </p>
                   </td>
@@ -208,7 +210,7 @@
               </tbody>
             </table>
           </div>
-          <el-button class="origin_btn origin_btn--tertiary" @click="$router.push(`/order/template/sheet2`)">
+          <el-button class="origin_btn origin_btn--tertiary" @click="$router.push(`/order/template/sheet3`)">
             戻る
           </el-button>
           <el-button class="origin_btn origin_btn--primary" @click="saveOrderData">
@@ -237,59 +239,17 @@ export default {
   data: () => {
     return {
       date: '',
-      employList: [],
-      jobCategory: [],
-      localList: [],
-      displayList: [],
-      responsiveList: [],
     }
   },
   created () {
     setTimeout(() => {
-      console.log(this.$store.state.order)
       let date = this.$store.state.order.deliveryDate
       const momentDate = this.$moment(date).format('YYYY/MM/DD')
       this.date = momentDate
-      // チェック済み職業
-      const emp = this.$store.state.order.checkedEmployment
-      for (let i = 0; i < emp.length; i++) {
-        this.employList.push(emp[i].val)
-      }
-      // チェック済み職種
-      const category = this.$store.state.order.checkedJobCategory
-      for (let i = 0; i < category.length; i++) {
-        this.jobCategory.push(category[i].val)
-      }
-      // チェック済み地方圏
-      const lcl = this.$store.state.order.checkedLocal
-      for (let i = 0; i < lcl.length; i++) {
-        this.localList.push(lcl[i].area)
-      }
-      // チェック済み表示プラットフォーム
-      const dsp = this.$store.state.order.checkedDisplay
-      for (let i = 0; i < dsp.length; i++) {
-        this.displayList.push(dsp[i])
-      }
-      // チェック済みレスポンシブ
-      const rsp = this.$store.state.order.checkedResponsive
-      for (let i = 0; i < rsp.length; i++) {
-        this.responsiveList.push(rsp[i].val)
-      }
     }, 5)
   },
   methods: {
     downloadCSV() {
-      const lists = this.displayList
-      let disply = []
-      for (let i = 0; i < lists.length; i++) {
-        disply.push(lists[i].val)
-      }
-      let version = []
-      for (let i = 0; i < lists.length; i++) {
-        version.push(lists[i].version)
-      }
-      console.log(disply, version)
-
       let array_data = [
         ['クライアント名',this.$store.state.order.clientName],
         ['担当者名',this.$store.state.order.repName],
@@ -305,13 +265,13 @@ export default {
         ['依頼範囲',this.$store.state.order.orderRange],
         ['年齢層',`${this.$store.state.order.age[0]}代〜${this.$store.state.order.age[1]}代`],
         ['性別',this.$store.state.order.gender],
-        ['職業', this.employList],
-        ['職種', this.jobCategory],
-        ['地方圏', this.localList],
+        ['職業', this.$store.state.order.checkedEmployment],
+        ['職種', this.$store.state.order.checkedJobCategory],
+        ['地方圏', this.$store.state.order.checkedLocal],
         ['使用プラットフォーム',this.$store.state.order.useEnvironment],
-        ['表示プラットフォーム', disply],
-        ['プラットフォームバージョン', version],
-        ['レスポンシブ', this.responsiveList],
+        ['表示プラットフォーム', this.$store.state.order.checkedDisplay],
+        ['プラットフォームバージョン', this.$store.state.order.environmentVersion],
+        ['レスポンシブ', this.$store.state.order.checkedResponsive],
         ['参考サイト',this.$store.state.order.referenceSite1, this.$store.state.order.referenceSite2, this.$store.state.order.referenceSite3],
         ['その他サイトイメージ',this.$store.state.order.otherReferenceSite],
         ['必要機能',this.$store.state.order.requiredFeature],
@@ -334,7 +294,6 @@ export default {
         ['備考',this.$store.state.order.memo],
       ]
       
-      // let array_data = [['りんご',1,200],['メロン',2,4000],['バナナ',4,500]];
       // BOM の用意（文字化け対策）
       const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
       // CSV データの用意
@@ -349,52 +308,54 @@ export default {
       const uid = firebase.auth().currentUser.uid;
       firebase.firestore().collection(uid).add({
         status: this.$store.state.order.status,
-        client: this.$store.state.order.clientName,
-        rep: this.$store.state.order.repName,
-        project: this.$store.state.order.projectName,
-        delivery: this.$store.state.order.deliveryMethod,
+        clientName: this.$store.state.order.clientName,
+        repName: this.$store.state.order.repName,
+        projectName: this.$store.state.order.projectName,
+        deliveryMethod: this.$store.state.order.deliveryMethod,
         date: this.date,
         hopeTime: this.$store.state.order.hopeTime,
         hopeTimeDetail: this.$store.state.order.hopeTimeDetail,
-        site: this.$store.state.order.siteName,
-        desc: this.$store.state.order.siteDescription,
-        ogp: this.$store.state.order.ogpText,
-        purpose: this.$store.state.order.productionPurpose,
-        range: this.$store.state.order.orderRange,
+        siteName: this.$store.state.order.siteName,
+        siteDescription: this.$store.state.order.siteDescription,
+        ogpText: this.$store.state.order.ogpText,
+        productionPurpose: this.$store.state.order.productionPurpose,
+        orderRange: this.$store.state.order.orderRange,
         age: this.$store.state.order.age,
         gender: this.$store.state.order.gender,
-        employ: this.employList,
-        job: this.jobCategory,
-        local: this.localList,
-        env: this.$store.state.order.useEnvironment,
-        display: this.displayList,
-        responsive: this.responsiveList,
+        checkedEmployment: this.$store.state.order.checkedEmployment,
+        checkedJobCategory: this.$store.state.order.checkedJobCategory,
+        checkedLocal: this.$store.state.order.checkedLocal,
+        useEnvironment: this.$store.state.order.useEnvironment,
+        checkedDisplay: this.$store.state.order.checkedDisplay,
+        environmentVersion: this.$store.state.order.environmentVersion,
+        checkedResponsive: this.$store.state.order.checkedResponsive,
         refarence: [
           this.$store.state.order.referenceSite1,
           this.$store.state.order.referenceSite2,
           this.$store.state.order.referenceSite3
         ],
-        otherSite: this.$store.state.order.otherReferenceSite,
-        feature: this.$store.state.order.requiredFeature,
-        image: this.$store.state.order.imagePreparation,
-        imgCollection: this.$store.state.order.collectionImgUrl,
-        text: this.$store.state.order.textPreparation,
-        textCollection: this.$store.state.order.collectionTextUrl,
+        otherReferenceSite: this.$store.state.order.otherReferenceSite,
+        requiredFeature: this.$store.state.order.requiredFeature,
+        imagePreparation: this.$store.state.order.imagePreparation,
+        collectionImgUrl: this.$store.state.order.collectionImgUrl,
+        textPreparation: this.$store.state.order.textPreparation,
+        collectionTextUrl: this.$store.state.order.collectionTextUrl,
         copyright: this.$store.state.order.copyright,
         analytics: this.$store.state.order.analytics,
         serverName: this.$store.state.order.serverName,
         serverPassword: this.$store.state.order.serverPassword,
-        controlId: this.$store.state.order.controlLoginId,
-        controlPassword: this.$store.state.order.controlLoginPassword,
-        ftpName: this.$store.state.order.ftpServerName,
+        controlLoginId: this.$store.state.order.controlLoginId,
+        controlLoginPassword: this.$store.state.order.controlLoginPassword,
+        ftpServerName: this.$store.state.order.ftpServerName,
         ftpAccountName: this.$store.state.order.ftpAccountName,
-        wordpressid: this.$store.state.order.wordpressLoginId,
-        wordpressPassword: this.$store.state.order.wordpressLoginPassword,
-        otherid: this.$store.state.order.otherLoginId,
-        otherPassword: this.$store.state.order.otherLoginPassword,
+        wordpressLoginId: this.$store.state.order.wordpressLoginId,
+        wordpressLoginPassword: this.$store.state.order.wordpressLoginPassword,
+        otherLoginId: this.$store.state.order.otherLoginId,
+        otherLoginPassword: this.$store.state.order.otherLoginPassword,
         memo: this.$store.state.order.memo
       })
         .then(() => {
+          this.$store.commit('completeOrder')
           this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
         })
         .catch((error) => {

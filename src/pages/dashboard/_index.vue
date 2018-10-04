@@ -1,6 +1,21 @@
 <template>
   <div>
     <section class="section section--style_1">
+      <el-alert
+        title="案件依頼の削除が完了しました"
+        type="success"
+        :class="{anim: success === true}"
+      />
+      <el-alert
+        title="案件作成が完了しました"
+        type="success"
+        :class="{anim: $store.state.completeOrder === true}"
+      />
+      <el-alert
+        title="案件編集が完了しました"
+        type="success"
+        :class="{anim: $store.state.completeEditOrder === true}"
+      />
       <page-sidebar />
       <div class="dashboard-main">
         <div class="wrapper--main">
@@ -34,19 +49,34 @@
                       {{ item.status }}
                     </span>
                   </td>
-                  <td><a @click="$router.push(`/order/template/detail/${item.key}`)">{{ item.project }}</a></td>
-                  <td>{{ item.client }}</td>
-                  <td>{{ item.rep }}</td>
+                  <td><a @click="$router.push(`/order/template/detail/${item.key}`)">{{ item.projectName }}</a></td>
+                  <td>{{ item.clientName }}</td>
+                  <td>{{ item.repName }}</td>
                   <td>{{ item.date }}</td>
                   <td>
-                    <el-button class="origin_btn--small origin_btn--primary">
+                    <el-button class="origin_btn--small origin_btn--primary" @click="$router.push(`/order/edit/edit1/${item.key}`)">
                       編集
                     </el-button>
                   </td>
                   <td>
-                    <el-button class="origin_btn--small origin_btn--secondary">
+                    <el-button class="origin_btn--small origin_btn--secondary" @click="dialogVisible = true">
                       削除
                     </el-button>
+                    <el-dialog
+                      title="削除確認"
+                      :visible.sync="dialogVisible"
+                      width="640px"
+                      center
+                    >
+                      <p class="delete__text">
+                        選択したデータを削除します。<br />
+                        本当に削除してもよろしいですか？
+                        <br /><br />
+                        ※削除したデータを復旧させることはできませんのでご注意ください
+                      </p>
+                      <el-button class="origin_btn--small origin_btn--secondary" @click="dialogVisible = false">キャンセル</el-button>
+                      <el-button class="origin_btn--small origin_btn--primary" @click="deleteData(item.key)">削除</el-button>
+                    </el-dialog>
                   </td>
                 </tr>
               </tbody>
@@ -74,7 +104,9 @@ export default {
   data: () => {
     return {
       uid: '',
-      orders: []
+      orders: [],
+      dialogVisible: false,
+      success: false
     }
   },
   created () {
@@ -89,6 +121,26 @@ export default {
           this.orders.push(Object.assign({ key: doc.id }, doc.data()))
         })
       })
+  },
+  methods: {
+    deleteData (key) {
+      firebase.firestore().collection(this.uid).doc(key).delete()
+        .then(() => {
+          this.dialogVisible = false
+          this.success = true
+          this.orders = []
+
+          firebase.firestore().collection(this.uid).get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                this.orders.push(Object.assign({ key: doc.id }, doc.data()))
+              })
+            })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>
@@ -113,8 +165,14 @@ thead {
 }
 tbody {
   tr {
+    transition: $init-anim;
+
     &:nth-child(even) {
       background-color: #f1f1f1;
+    }
+    &:hover {
+      transition: $init-anim;
+      background-color: #f8ffff;
     }
   }
 }
@@ -131,14 +189,6 @@ th, td {
       transition: $init-anim;
       text-decoration: underline;
     }
-  }
-}
-tr {
-  transition: $init-anim;
-
-  &:hover {
-    transition: $init-anim;
-    background-color: #f8ffff;
   }
 }
 </style>
