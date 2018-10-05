@@ -2,7 +2,7 @@
   <div>
     <section class="section section--detail">
       <div class="detail-thumbnail">
-        <img src="/img/order/order_img_background.jpg" alt="" />
+        <img :src="thumbItem" alt="" />
       </div>
       <div class="wrapper--detail">
         <div class="inner--detail" v-for="(item, i) in data" :key="i">
@@ -226,7 +226,20 @@ export default {
     return {
       title: '',
       data: [],
-      key: ''
+      key: '',
+      thumbnailes: [
+        '/img/order/order_img_background_1.jpg',
+        '/img/order/order_img_background_2.jpg',
+        '/img/order/order_img_background_3.jpg',
+        '/img/order/order_img_background_4.jpg',
+        '/img/order/order_img_background_5.jpg',
+        '/img/order/order_img_background_6.jpg',
+        '/img/order/order_img_background_7.jpg',
+        '/img/order/order_img_background_8.jpg',
+        '/img/order/order_img_background_9.jpg',
+        '/img/order/order_img_background_10.jpg',
+      ],
+      thumbItem: ''
     }
   },
   created () {
@@ -237,6 +250,8 @@ export default {
         this.key = doc.id
         this.data.push(doc.data())
       })
+    const thumb = this.thumbnailes
+    return this.thumbItem = thumb[Math.floor(Math.random() * thumb.length)]
   },
   mounted () {
     setTimeout(() => {
