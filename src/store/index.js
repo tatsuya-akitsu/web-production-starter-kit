@@ -7,6 +7,13 @@ const createStore = () => {
       isLoggined: false,
       completeOrder: false,
       completeEditOrder: false,
+      completeProfile: false,
+      setErrorName: false,
+      setErrorNameLength: false,
+      setErrorMail: false,
+      setErrorMailReg: false,
+      setErrorPasswordLength: false,
+      setErrorPasswordReg: false,
       order: {
         status: 'create', // 案件ステータス
         clientName: '', // クライアント名
@@ -282,6 +289,24 @@ const createStore = () => {
       },
       completeEditOrder (state) {
         state.completeEditOrder = true
+      },
+      updateProfile (state) {
+        state.completeProfile = true
+      },
+      errorConsole (state, value) {
+        if (value === 'nameLength') {
+          state.setErrorNameLength = true
+        } else if (value === 'nameReg') {
+          state.setErrorName = true
+        } else if (value === 'mailLength') {
+          state.setErrorMail = true
+        } else if (value === 'mailReg') {
+          state.setErrorMailReg = true
+        } else if (value === 'passwordLength') {
+          state.setErrorPasswordLength = true
+        } else if (value === 'passwordReg') {
+          state.setErrorPasswordReg = true
+        }
       }
     }
   })

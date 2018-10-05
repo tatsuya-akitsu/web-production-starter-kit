@@ -89,35 +89,22 @@
   background-color: #f7fbfe;
 }
 
-.form-msg {
-  margin: 0;
-  padding: 1rem 3rem;
-  font-size: 0;
-  text-align: left;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 3px;
-
-  img {
-    display: inline-block;
-    vertical-align: middle;
-    margin: -.2rem 1rem 0 0;
-    width: 1.4rem;
-  }
-}
-.alert-msg {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.4rem;
-  color: #721c24;
-}
-
 .form__note {
   margin: 0;
   padding-top: 1rem;
   font-size: 1.2rem;
   color: #dddddd;
   text-align: left;
+}
+
+.form-control {
+  transition: $init-anim;
+  &.error {
+    .el-input__inner {
+      transition: $init-anim;
+      border: 1px solid #f56c6c;
+    }
+  }
 }
 
 // input
