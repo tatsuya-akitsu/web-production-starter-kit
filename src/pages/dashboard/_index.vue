@@ -5,16 +5,19 @@
         title="案件依頼の削除が完了しました"
         type="success"
         :class="{anim: success === true}"
+        show-icon
       />
       <el-alert
         title="案件作成が完了しました"
         type="success"
         :class="{anim: $store.state.completeOrder === true}"
+        show-icon
       />
       <el-alert
         title="案件編集が完了しました"
         type="success"
         :class="{anim: $store.state.completeEditOrder === true}"
+        show-icon
       />
       <page-sidebar />
       <div class="dashboard-main">
@@ -112,6 +115,7 @@ export default {
   created () {
     this.$store.commit('loggined')
     this.uid = firebase.auth().currentUser.uid
+    console.log(firebase.auth().currentUser)
   },
   mounted() {
     this.$store.commit('outLoading')

@@ -25,13 +25,13 @@
           </a>
         </li>
         <li>
-          <a>
+          <a @click="$router.push(`/mypage/${uid}`)">
             <img src="/img/dashboard/dashboard_img_5.svg" alt="" />
             マイページ
           </a>
         </li>
         <li>
-          <a>
+          <a @click="$router.push(`/config/${uid}`)">
             <img src="/img/dashboard/dashboard_img_3.svg" alt="" />
             設定
           </a>

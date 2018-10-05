@@ -5,12 +5,30 @@
         <img src="/img/logo.svg" alt="" class="login__logo" />
         <h2 class="login-title">ログイン</h2>
         <form id="loginform" name="loginform" class="form" method="post" @submit.prevent="normalLogin">
-          <div class="form-announce">
-            <p class="form-msg" v-for="(item, i) in errors" :key="i">
-              <img src="/img/icon/icon_exclamation.svg" alt="" />
-              <span class="alert-msg">{{ item }}</span>
-            </p>
-          </div>
+          <el-alert
+            title="メールアドレスが未入力です"
+            type="error"
+            :class="{anim: $store.state.setErrorMail === true}"
+            show-icon
+          />
+          <el-alert
+            title="メールアドレスの入力形式が違います"
+            type="error"
+            :class="{anim: $store.state.setErrorMailReg === true}"
+            show-icon
+          />
+          <el-alert
+            title="パスワードが未入力です"
+            type="error"
+            :class="{anim: $store.state.setErrorPasswordLength === true}"
+            show-icon
+          />
+          <el-alert
+            title="パスワードは半角英数字の大文字･小文字･数字を含む8文字以上で設定をお願いします"
+            type="error"
+            :class="{anim: $store.state.setErrorPasswordReg === true}"
+            show-icon
+          />
           <div class="form-item">
             <label class="form-label">
               <span class="label__title">メールアドレス</span>
@@ -22,6 +40,7 @@
                 v-model="email"
                 placeholder="メールアドレス"
                 class="form-control"
+                :class="{error: $store.state.setErrorMail === true || $store.state.setErrorMailReg === true}"
               />
             </div>
           </div>
@@ -36,6 +55,7 @@
                 v-model="password"
                 placeholder="パスワード"
                 class="form-control"
+                :class="{error: $store.state.setErrorPasswordLength === true || $store.state.setErrorPasswordReg === true}"
               />
             </div>
           </div>
@@ -138,19 +158,23 @@ export default {
       if (!mail.length) {
         isValid = false
         this.errors.push('メールアドレスが未入力です')
+        this.$store.commit('errorConsole', 'mailLength')
       }
       if (!mail.match(regMail)) {
         isValid = false
         this.errors.push('メールアドレスの入力形式が違います')
+        this.$store.commit('errorConsole', 'mailReg')
       }
 
       if (!password.length) {
         isValid = false
         this.errors.push('パスワードが未入力です')
+        this.$store.commit('errorConsole', 'passwordLength')
       }
       if (!password.match(regPassword)) {
         isValid = false
         this.errors.push('パスワードの入力形式が違います')
+        this.$store.commit('errorConsole', 'passwordReg')
       }
 
       if (!isValid) {

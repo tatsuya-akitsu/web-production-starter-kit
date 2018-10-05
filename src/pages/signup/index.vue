@@ -5,12 +5,48 @@
         <img src="/img/logo.svg" alt="" class="signup__logo" />
         <h2 class="signup-title">POiDERはWEB制作依頼を<br />スムーズに行うプラットフォームです</h2>
         <form id="signupform" name="signupform" class="form" method="post" @submit.prevent="createAccount">
-          <div class="form-announce">
-            <p class="form-msg" v-for="(item, i) in errors" :key="i">
-              <img src="/img/icon/icon_exclamation.svg" alt="" />
-              <span class="alert-msg">{{ item }}</span>
-            </p>
-          </div>
+          <el-alert
+            title="プロフィールの変更が完了しました"
+            type="success"
+            :class="{anim: $store.state.completeProfile === true}"
+            show-icon
+          />
+          <el-alert
+            title="アカウント名が未入力です"
+            type="error"
+            :class="{anim: $store.state.setErrorNameLength === true}"
+            show-icon
+          />
+          <el-alert
+            title="卑猥もしくは不適切な言葉が含まれています"
+            type="error"
+            :class="{anim: $store.state.setErrorName === true}"
+            show-icon
+          />
+          <el-alert
+            title="メールアドレスが未入力です"
+            type="error"
+            :class="{anim: $store.state.setErrorMail === true}"
+            show-icon
+          />
+          <el-alert
+            title="メールアドレスの入力形式が違います"
+            type="error"
+            :class="{anim: $store.state.setErrorMailReg === true}"
+            show-icon
+          />
+          <el-alert
+            title="パスワードが未入力です"
+            type="error"
+            :class="{anim: $store.state.setErrorPasswordLength ===  true}"
+            show-icon
+          />
+          <el-alert
+            title="パスワードは半角英数字の大文字･小文字･数字を含む8文字以上で設定をお願いします"
+            type="error"
+            :class="{anim: $store.state.setErrorPasswordReg === true}"
+            show-icon
+          />
           <div class="form-item">
             <label class="form-label">
               <span class="label__title">ユーザー名</span>
@@ -23,6 +59,7 @@
                 v-model="name"
                 placeholder="ユーザーネーム"
                 class="form-control"
+                :class="{error: $store.state.setErrorName === true || $store.state.setErrorNameLength === true}"
               />
             </div>
           </div>
@@ -38,6 +75,7 @@
                 v-model="email"
                 placeholder="メールアドレス"
                 class="form-control"
+                :class="{error: $store.state.setErrorMail === true || $store.state.setErrorMailReg === true}"
               />
             </div>
           </div>
@@ -53,6 +91,7 @@
                 v-model="password"
                 placeholder="パスワード"
                 class="form-control"
+                :class="{error: $store.state.setErrorPasswordLength === true || $store.state.setErrorPasswordReg === true}"
               />
               <p class="form__note">パスワードは半角英数字の大文字･小文字･数字を含む8文字以上で設定をお願いします</p>
             </div>
@@ -198,28 +237,34 @@ export default {
       if (!name.length) {
         isValid = false
         this.errors.push('アカウント名が未入力です')
+        this.$store.commit('errorConsole', 'nameLength')
       }
       if (regName.test(name)) {
         isValid = false
         this.errors.push('卑猥もしくは不適切な言葉が含まれています')
+        this.$store.commit('errorConsole', 'nameReg')
       }
 
       if (!email.length) {
         isValid = false
         this.errors.push('メールアドレスが未入力です')
+        this.$store.commit('errorConsole', 'mailLength')
       }
       if (!email.match(regEmail)) {
         isValid = false
         this.errors.push('メールアドレスの入力形式が違います')
+        this.$store.commit('errorConsole', 'mailReg')
       }
 
       if (!password.length) {
         isValid = false
         this.errors.push('パスワードが未入力です')
+        this.$store.commit('errorConsole', 'passwordLength')
       }
       if (!password.match(regPW)) {
         isValid = false
         this.errors.push('パスワードは半角英数字の大文字･小文字･数字を含む8文字以上で設定をお願いします')
+        this.$store.commit('errorConsole', 'passwordReg')
       }
 
       if(!isValid) {

@@ -178,6 +178,22 @@ img {
     }
   }
 }
+.origin_btn--aleart {
+  background-color: #f56c6c;
+  border: 1px solid #f56c6c;
+
+  span {
+    color: $base-wh;
+  }
+
+  &:hover {
+    background-color: $base-wh;
+
+    span {
+      color: #f56c6c;
+    }
+  }
+}
 .origin_btn--small {
   padding: 1.2rem 2.8rem;
   border-radius: 5px;
