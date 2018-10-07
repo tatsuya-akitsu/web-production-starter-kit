@@ -250,8 +250,10 @@ export default {
         this.key = doc.id
         this.data.push(doc.data())
       })
-    const thumb = this.thumbnailes
-    return this.thumbItem = thumb[Math.floor(Math.random() * thumb.length)]
+    setTimeout(() => {
+      const thumb = this.thumbnailes
+      return this.thumbItem = thumb[Math.floor(Math.random() * thumb.length)]
+    }, 5)
   },
   mounted () {
     setTimeout(() => {
