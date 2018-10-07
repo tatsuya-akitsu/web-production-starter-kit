@@ -15,6 +15,8 @@ const createStore = () => {
       setErrorPasswordLength: false,
       setErrorPasswordReg: false,
       alreadyCreadential: false,
+      searchUsers: false,
+      errorSearchUsers: false,
       order: {
         status: 'create', // 案件ステータス
         clientName: '', // クライアント名
@@ -311,7 +313,13 @@ const createStore = () => {
       },
       alreadyLoggined (state) {
         state.alreadyCreadential = true
-      } 
+      },
+      searchUser (state) {
+        state.searchUsers = true
+      },
+      searchErrorUser (state) {
+        state.errorSearchUsers = true
+      }
     }
   })
 }
