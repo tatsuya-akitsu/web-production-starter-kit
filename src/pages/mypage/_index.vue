@@ -13,6 +13,8 @@
               <p class="name"><img src="/img/dashboard/dashboard_img_5.svg" alt="" />{{ name }}</p>
               <p class="email"><img src="/img/mypage/mypage_img_1.svg" alt="" />{{ email }}</p>
               <p class="provider" v-if="provider === 'google.com'"><img src="/img/icon/icon_google.svg" alt="" />{{ provider }}</p>
+              <p class="provider" v-else-if="provider === 'facebook.com'"><img src="/img/icon/icon_facebook.svg" alt="" />{{ provider }}</p>
+              <p class="provider" v-else-if="provider === 'github.com'"><img src="/img/icon/icon_github.svg" alt="" />{{ provider }}</p>
             </div>
           </div>
         </div>
@@ -51,6 +53,7 @@ export default {
       this.photoUrl = firebase.auth().currentUser.photoURL
       firebase.auth().currentUser.providerData.forEach((profile) => {
         this.provider = profile.providerId
+        console.log(profile.providerId)
       })
     }, 5)
   }
