@@ -60,6 +60,20 @@
               <label class="form-label">
                 <span class="label__title">サイトイメージURL</span>
                 <span class="require-icon require-icon__required">必須</span>
+                <el-popover
+                  placement="top-start"
+                  width="350"
+                  trigger="hover"
+                >
+                  <div class="popover__inner">
+                    <p class="title">サイトイメージURLとは</p>
+                    <p class="content">
+                      サイトイメージURLは、競合やトンマナ、機能面などいいなと思うもの、参考にしたいサイトを3つ入力してください。<br />
+                      例えば同じ『青』でもスカイブルーであったり群青であったり、ポップなテイストでも『可愛らしい』や『子供っぽい』など様々な表現が可能になります。クライアントの方とイメージを共通に持つためにも設定をお願いします。
+                    </p>
+                  </div>
+                  <el-button slot="reference"><img src="/img/icon/icon_help.svg" alt="" /></el-button>
+                </el-popover>
               </label>
               <div class="form-item__inner">
                 <el-input
@@ -91,7 +105,20 @@
             <div class="form-item order-item">
               <label class="form-label">
                 <span class="label__title">その他サイトイメージ</span>
-                <span class="require-icon require-icon__required">必須</span>
+                <span class="require-icon require-icon__any">任意</span>
+                <el-popover
+                  placement="top-start"
+                  width="350"
+                  trigger="hover"
+                >
+                  <div class="popover__inner">
+                    <p class="title">その他サイトイメージとは</p>
+                    <p class="content">
+                      サイトイメージURLほどでは無いが、機能面やフォームの入力項目など、細かい部分で参考にしたい。同じにしたいなどの参考サイトなどがあればご入力をお願いします。
+                    </p>
+                  </div>
+                  <el-button slot="reference"><img src="/img/icon/icon_help.svg" alt="" /></el-button>
+                </el-popover>
               </label>
               <div class="form-item__inner">
                 <el-input

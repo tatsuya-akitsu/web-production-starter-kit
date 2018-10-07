@@ -1,7 +1,7 @@
 <template>
   <header id="header" class="header">
     <div class="wrapper--header" v-if="!$store.state.isLoggined">
-      <p class="header-note">幅広いWEB制作に対応する依頼・見積りを簡易制作｜POiDER</p>
+      <p class="header-note"><a>幅広いWEB制作に対応する依頼・見積りを簡易制作｜POiDER</a></p>
       <div class="header__area">
         <a class="header__link" @click="$router.push('/signup')">新規登録</a>
         <a class="header__link" @click="$router.push('/login')">ログイン</a>
@@ -42,6 +42,7 @@ export default {
 }
 
 .header-note {
+  cursor: pointer;
   margin: 0;
   font-size: 1.2rem;
   color: $base-wh;

@@ -107,6 +107,21 @@
                 <span class="label__title">サイト名</span>
                 <span class="require-icon require-icon__required">必須</span>
               </label>
+              <el-popover
+                  placement="top-start"
+                  width="350"
+                  trigger="hover"
+                >
+                  <div class="popover__inner">
+                    <p class="title">サイト名とは</p>
+                    <p class="content">
+                      サイト名とはGoogleなどの検索エンジンを使用した際に、表示される画像の赤枠部分になります。<br />
+                      検索エンジンから流入してくるユーザーにとってはファーストコンタクトの部分になるので、明瞭完結に伝わる名前を設定してください。
+                    </p>
+                    <img src="/img/order/helper_img_1.jpg" alt="" />
+                  </div>
+                  <el-button slot="reference"><img src="/img/icon/icon_help.svg" alt="" /></el-button>
+                </el-popover>
               <div class="form-item__inner">
                 <el-input
                   name="siteName"
@@ -120,6 +135,24 @@
               <label class="form-label">
                 <span class="label__title">サイトディスクリプション</span>
                 <span class="require-icon require-icon__required">必須</span>
+                <el-popover
+                  placement="top-start"
+                  width="350"
+                  trigger="hover"
+                >
+                  <div class="popover__inner">
+                    <p class="title">サイトディスクリプションとは</p>
+                    <p class="content">
+                      サイトディスクリプションとは、Googleなどの検索エンジンを使用した際に、表示される画像の赤枠部分です。<br />
+                      検索エンジンから流入してくるユーザーにとってはこの文章で自身が知りたい情報があるサイトかどうかを判断する大切な文章です。<br />
+                      また、SEOの観点からもこの文章とサイト内のコンテンツの整合性も判断基準の一つとなっています。下記文字数を目安に慎重に設定してください。<br /><br />
+                      PC：100~130文字<br />
+                      スマートフォン：70~80文字
+                    </p>
+                    <img src="/img/order/helper_img_2.jpg" alt="" />
+                  </div>
+                  <el-button slot="reference"><img src="/img/icon/icon_help.svg" alt="" /></el-button>
+                </el-popover>
               </label>
               <div class="form-item__inner">
                 <el-input
@@ -134,6 +167,22 @@
               <label class="form-label">
                 <span class="label__title">OGPテキスト</span>
                 <span class="require-icon require-icon__required">必須</span>
+                <el-popover
+                  placement="top-start"
+                  width="350"
+                  trigger="hover"
+                >
+                  <div class="popover__inner">
+                    <p class="title">OGPテキストとは</p>
+                    <p class="content">
+                      OGPとは、FacebookやTwitterなどの各種SNSにてサイトがシェアされた時に表示されるカード状のものです。<br />
+                      SNSから流入してくるユーザーにとってはここでサイトに興味を持つ大切なものです。<br />
+                      ここでは画像の赤枠部分を入力してください。目安の文字数は80~90文字です。
+                    </p>
+                    <img src="/img/order/helper_img_3.jpg" alt="" />
+                  </div>
+                  <el-button slot="reference"><img src="/img/icon/icon_help.svg" alt="" /></el-button>
+                </el-popover>
               </label>
               <div class="form-item__inner">
                 <el-input
@@ -181,6 +230,20 @@
               <label class="form-label">
                 <span class="label__title">ターゲット層</span>
                 <span class="require-icon require-icon__required">必須</span>
+                <el-popover
+                  placement="top-start"
+                  width="350"
+                  trigger="hover"
+                >
+                  <div class="popover__inner">
+                    <p class="title">ターゲット層とは</p>
+                    <p class="content">
+                      ターゲット層は、そのサイトを届けたいユーザーです。<br />
+                      どのサービスやサイトも勿論幅広いターゲットに届いてもらえることにこしたことはありませんが、まずは着実に届いてほしいユーザーを定義することで、サイト全体のテイストや文章など大きく変わってきて、届き方にも影響を与えます。
+                    </p>
+                  </div>
+                  <el-button slot="reference"><img src="/img/icon/icon_help.svg" alt="" /></el-button>
+                </el-popover>
               </label>
               <div class="form-item__inner">
                 <div class="form-item__column form-column">
