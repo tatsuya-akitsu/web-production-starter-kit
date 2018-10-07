@@ -218,6 +218,38 @@ img {
     width: 1.4rem;
   }
 }
+.follow_btn {
+  position: relative;
+  padding: .5rem !important;
+  width: 5rem;
+  height: 5rem;
+  transition: $init-anim;
+  
+  span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &:hover {
+    transition: $init-anim;
+    background-color: #f56c6c;
+
+    svg,
+    path {
+      fill: $base-wh;
+    }
+  }
+}
 
 .origin-badge {
   display: inline-block;
