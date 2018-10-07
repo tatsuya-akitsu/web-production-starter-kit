@@ -60,7 +60,7 @@
             </div>
           </div>
           <el-button native-type="submit" class="origin_btn origin_btn--primary">ログイン</el-button>
-          <a class="login__link">パスワードを忘れた方はこちら</a>
+          <a class="login__link" @click="$router.push('/forgotPassword')">パスワードを忘れた方はこちら</a>
         </form>
         <span class="login__note">or</span>
         <div class="login__btn-wrap">

@@ -29,7 +29,7 @@ export default {
   name: 'top',
   head() {
     return {
-      title: 'サービストップページ'
+      title: '依頼作成プラットフォーム'
     }
   },
   data: () => {},
