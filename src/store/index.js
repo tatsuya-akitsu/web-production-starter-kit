@@ -17,6 +17,7 @@ const createStore = () => {
       alreadyCreadential: false,
       searchUsers: false,
       errorSearchUsers: false,
+      followingUser: false,
       order: {
         status: 'create', // 案件ステータス
         clientName: '', // クライアント名
@@ -319,6 +320,9 @@ const createStore = () => {
       },
       searchErrorUser (state) {
         state.errorSearchUsers = true
+      },
+      followUser (state) {
+        state.followingUser = true
       }
     }
   })

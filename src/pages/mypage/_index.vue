@@ -12,6 +12,8 @@
             <div class="profile__content">
               <p class="name"><img src="/img/dashboard/dashboard_img_5.svg" alt="" />{{ name }}</p>
               <p class="email"><img src="/img/mypage/mypage_img_1.svg" alt="" />{{ email }}</p>
+              <p class="follow"><img src="/img/mypage/mypage_img_2.svg" alt="" />{{ follow.length }}フォロー</p>
+              <p class="followers"><img src="/img/mypage/mypage_img_3.svg" alt="" />{{ followers.length }}フォロワー</p>
               <p class="provider" v-if="provider === 'google.com'"><img src="/img/icon/icon_google.svg" alt="" />{{ provider }}</p>
               <p class="provider" v-else-if="provider === 'facebook.com'"><img src="/img/icon/icon_facebook.svg" alt="" />{{ provider }}</p>
               <p class="provider" v-else-if="provider === 'github.com'"><img src="/img/icon/icon_github.svg" alt="" />{{ provider }}</p>
@@ -42,7 +44,9 @@ export default {
       name: '',
       email: '',
       photoUrl: '',
-      provider: ''
+      provider: '',
+      follow: '',
+      followers: ''
     }
   },
   created () {
@@ -55,6 +59,29 @@ export default {
         this.provider = profile.providerId
         console.log(profile.providerId)
       })
+
+      let followData = []
+      let followerData = []
+      firebase.firestore().collection('users').doc(this.email).collection('follow').get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            followData.push(doc.data())
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      firebase.firestore().collection('users').doc(this.email).collection('followers').get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            followerData.push(doc.data())
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      this.follow = followData
+      this.followers = followerData
     }, 5)
   }
 }
@@ -113,6 +140,10 @@ export default {
 }
 .email {
   font-size: 1.6rem;
+}
+.follow,
+.followers {
+  font-size: 1.4rem;
 }
 .provider {
   font-size: 1.6rem;
