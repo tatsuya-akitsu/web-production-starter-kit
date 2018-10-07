@@ -14,6 +14,7 @@ const createStore = () => {
       setErrorMailReg: false,
       setErrorPasswordLength: false,
       setErrorPasswordReg: false,
+      alreadyCreadential: false,
       order: {
         status: 'create', // 案件ステータス
         clientName: '', // クライアント名
@@ -307,7 +308,10 @@ const createStore = () => {
         } else if (value === 'passwordReg') {
           state.setErrorPasswordReg = true
         }
-      }
+      },
+      alreadyLoggined (state) {
+        state.alreadyCreadential = true
+      } 
     }
   })
 }

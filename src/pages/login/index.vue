@@ -29,6 +29,12 @@
             :class="{anim: $store.state.setErrorPasswordReg === true}"
             show-icon
           />
+          <el-alert
+            title="同一メールアドレスでのログイン情報があります。もう一度お願いします"
+            type="error"
+            :class="{anim: $store.state.alreadyCreadential === true}"
+            show-icon
+          />
           <div class="form-item">
             <label class="form-label">
               <span class="label__title">メールアドレス</span>
@@ -122,6 +128,7 @@ export default {
           this.$router.push(`/dashboard/${result.user.uid}`)
         })
         .catch((error) => {
+          this.$store.commit('alreadyLoggined')
           console.log(error)
         })
     },
@@ -133,6 +140,7 @@ export default {
           this.$router.push(`/dashboard/${result.user.uid}`)
         })
         .catch((error) => {
+          this.$store.commit('alreadyLoggined')
           console.log(error)
         })
     },
@@ -144,6 +152,7 @@ export default {
           this.$router.push(`/dashboard/${result.user.uid}`)
         })
         .catch((error) => {
+          this.$store.commit('alreadyLoggined')
           console.log(error)
         })
     },
