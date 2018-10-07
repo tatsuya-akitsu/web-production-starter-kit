@@ -18,6 +18,7 @@ const createStore = () => {
       searchUsers: false,
       errorSearchUsers: false,
       followingUser: false,
+      selectOrderUser: '',
       order: {
         status: 'create', // 案件ステータス
         clientName: '', // クライアント名
@@ -323,6 +324,9 @@ const createStore = () => {
       },
       followUser (state) {
         state.followingUser = true
+      },
+      selectUser (state, value) {
+        state.selectOrderUser = value
       }
     }
   })

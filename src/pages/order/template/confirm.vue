@@ -218,7 +218,7 @@
           </el-button>
           <a id="download" class="origin_btn origin_btn--primary" href="#" @click="downloadCSV">CSVダウンロード</a>
           <div class="order-wrap">
-            <div class="order_user-box" v-for="(item, i) in followData" :key="i" @click="selectUid(item.email)">
+            <div class="order_user-box" :class="{select: $store.state.selectOrderUser === item.email}" v-for="(item, i) in followData" :key="i" @click="selectUid(item.email)">
               <div class="thumbnail">
                 <img :src="item.photoUrl" alt="" />
               </div>
@@ -396,6 +396,7 @@ export default {
     },
     selectUid (value) {
       this.selectUEmail = value
+      this.$store.commit('selectUser', value)
     },
     setOrderData () {
       const email = firebase.auth().currentUser.email;
@@ -533,5 +534,50 @@ a.origin_btn {
   text-decoration: none;
   line-height: 1;
   vertical-align: middle;
+}
+
+.order-wrap {
+  margin: 3rem 0 0;
+}
+.order_user-box {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5rem 0 0;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: $init-anim;
+
+  .thumbnail {
+    width: 10rem;
+  }
+
+  .body {
+    padding-left: 4rem;
+    width: calc(100% - 10rem);
+    text-align: left;
+  }
+
+  .name {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+  .email {
+    margin: 0;
+    padding-top: 2rem;
+    font-size: 1.6rem;
+  }
+
+  &:nth-last-of-type(1) {
+    margin: 2.5rem 0 3rem;
+  }
+
+  &.select {
+    transition: $init-anim;
+    border: 1px solid $color-main;
+    background-color: rgba(14, 206, 200, 0.2);
+  }
 }
 </style>
