@@ -90,7 +90,7 @@
                         ※削除したデータを復旧させることはできませんのでご注意ください
                       </p>
                       <el-button class="origin_btn--small origin_btn--secondary" @click="dialogVisible = false">キャンセル</el-button>
-                      <el-button class="origin_btn--small origin_btn--primary" @click="deleteData(item.key)">削除</el-button>
+                      <el-button class="origin_btn--small origin_btn--primary" @click="deleteData(item.key, item.creator)">削除</el-button>
                     </el-dialog>
                   </td>
                 </tr>
@@ -189,16 +189,35 @@ export default {
   },
   mounted() {
     this.$store.commit('outLoading')
-    firebase.firestore().collection(this.uid).get()
+    let email = firebase.auth().currentUser.email
+    firebase.firestore().collection('users').doc(email).collection('orders').get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
+          console.log(doc.data())
           this.orders.push(Object.assign({ key: doc.id }, doc.data()))
         })
       })
   },
   methods: {
-    deleteData (key) {
-      firebase.firestore().collection(this.uid).doc(key).delete()
+    deleteData (key, value) {
+      console.log(key, value)
+      let email = firebase.auth().currentUser.email
+      firebase.firestore().collection('users').doc(value).collection('orders').get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            if (email === doc.data().orderBy) {
+              firebase.firestore().collection('users').doc(value).collection('orders').doc(doc.id).delete()
+                .then(() => {
+                  console.log('deleted')
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+            }
+          })
+        })
+      // 自身のDBから削除
+      firebase.firestore().collection('users').doc(email).collection('orders').doc(key).delete()
         .then(() => {
           this.dialogVisible = false
           this.success = true

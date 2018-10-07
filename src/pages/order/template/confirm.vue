@@ -217,6 +217,21 @@
             保存する
           </el-button>
           <a id="download" class="origin_btn origin_btn--primary" href="#" @click="downloadCSV">CSVダウンロード</a>
+          <div class="order-wrap">
+            <div class="order_user-box" v-for="(item, i) in followData" :key="i" @click="selectUid(item.email)">
+              <div class="thumbnail">
+                <img :src="item.photoUrl" alt="" />
+              </div>
+              <div class="body">
+                {{ item.uid }}
+                <p class="name">{{ item.name }}</p>
+                <p class="email">{{ item.email }}</p>
+              </div>
+            </div>
+            <el-button class="origin_btn origin_btn--primary" @click="setOrderData">
+              依頼する
+            </el-button>
+          </div>
         </div>
       </div>
     </section>
@@ -239,6 +254,8 @@ export default {
   data: () => {
     return {
       date: '',
+      followData: [],
+      selectUEmail: ''
     }
   },
   created () {
@@ -246,6 +263,18 @@ export default {
       let date = this.$store.state.order.deliveryDate
       const momentDate = this.$moment(date).format('YYYY/MM/DD')
       this.date = momentDate
+      
+      const email = firebase.auth().currentUser.email
+      firebase.firestore().collection('users').doc(email).collection('follow').get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.followData.push(doc.data())
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      console.log(this.followData)
     }, 5)
   },
   methods: {
@@ -305,8 +334,9 @@ export default {
       a.href = url;
     },
     saveOrderData () {
-      const uid = firebase.auth().currentUser.uid;
-      firebase.firestore().collection(uid).add({
+      const email = firebase.auth().currentUser.email;
+      const saveData = {
+        orderBy: email,
         status: this.$store.state.order.status,
         clientName: this.$store.state.order.clientName,
         repName: this.$store.state.order.repName,
@@ -353,7 +383,9 @@ export default {
         otherLoginId: this.$store.state.order.otherLoginId,
         otherLoginPassword: this.$store.state.order.otherLoginPassword,
         memo: this.$store.state.order.memo
-      })
+      }
+      // 自身のDBへ追加
+      firebase.firestore().collection('users').doc(email).collection('orders').add(saveData)
         .then(() => {
           this.$store.commit('completeOrder')
           this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
@@ -361,7 +393,82 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-    }
+    },
+    selectUid (value) {
+      this.selectUEmail = value
+    },
+    setOrderData () {
+      const email = firebase.auth().currentUser.email;
+      const setData = {
+        orderBy: email,
+        creator: this.selectUEmail,
+        status: this.$store.state.order.status,
+        clientName: this.$store.state.order.clientName,
+        repName: this.$store.state.order.repName,
+        projectName: this.$store.state.order.projectName,
+        deliveryMethod: this.$store.state.order.deliveryMethod,
+        date: this.date,
+        hopeTime: this.$store.state.order.hopeTime,
+        hopeTimeDetail: this.$store.state.order.hopeTimeDetail,
+        siteName: this.$store.state.order.siteName,
+        siteDescription: this.$store.state.order.siteDescription,
+        ogpText: this.$store.state.order.ogpText,
+        productionPurpose: this.$store.state.order.productionPurpose,
+        orderRange: this.$store.state.order.orderRange,
+        age: this.$store.state.order.age,
+        gender: this.$store.state.order.gender,
+        checkedEmployment: this.$store.state.order.checkedEmployment,
+        checkedJobCategory: this.$store.state.order.checkedJobCategory,
+        checkedLocal: this.$store.state.order.checkedLocal,
+        useEnvironment: this.$store.state.order.useEnvironment,
+        checkedDisplay: this.$store.state.order.checkedDisplay,
+        environmentVersion: this.$store.state.order.environmentVersion,
+        checkedResponsive: this.$store.state.order.checkedResponsive,
+        refarence: [
+          this.$store.state.order.referenceSite1,
+          this.$store.state.order.referenceSite2,
+          this.$store.state.order.referenceSite3
+        ],
+        otherReferenceSite: this.$store.state.order.otherReferenceSite,
+        requiredFeature: this.$store.state.order.requiredFeature,
+        imagePreparation: this.$store.state.order.imagePreparation,
+        collectionImgUrl: this.$store.state.order.collectionImgUrl,
+        textPreparation: this.$store.state.order.textPreparation,
+        collectionTextUrl: this.$store.state.order.collectionTextUrl,
+        copyright: this.$store.state.order.copyright,
+        analytics: this.$store.state.order.analytics,
+        serverName: this.$store.state.order.serverName,
+        serverPassword: this.$store.state.order.serverPassword,
+        controlLoginId: this.$store.state.order.controlLoginId,
+        controlLoginPassword: this.$store.state.order.controlLoginPassword,
+        ftpServerName: this.$store.state.order.ftpServerName,
+        ftpAccountName: this.$store.state.order.ftpAccountName,
+        wordpressLoginId: this.$store.state.order.wordpressLoginId,
+        wordpressLoginPassword: this.$store.state.order.wordpressLoginPassword,
+        otherLoginId: this.$store.state.order.otherLoginId,
+        otherLoginPassword: this.$store.state.order.otherLoginPassword,
+        memo: this.$store.state.order.memo
+      }
+
+      // 自身のDBへ追加
+      firebase.firestore().collection('users').doc(email).collection('orders').add(setData)
+        .then(() => {
+          this.$store.commit('completeOrder')
+          this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      // 依頼者のDBへ追加
+      firebase.firestore().collection('users').doc(this.selectUEmail).collection('orders').add(setData)
+        .then(() => {
+          this.$store.commit('completeOrder')
+          this.$router.push(`/dashboard/${firebase.auth().currentUser.uid}`)
+        })
+        .catch((error) => {
+          console.log(error)
+        }) 
+    },
   }
 }
 </script>
